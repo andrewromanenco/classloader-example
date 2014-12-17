@@ -1,0 +1,34 @@
+<project name="classloader-example">
+
+    <target name="clean">
+        <delete dir="bin"/>
+        <delete dir="dynamic_classes_1"/>
+        <delete dir="dynamic_classes_2"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="bin"/>
+        <javac srcdir="src" destdir="bin"/>
+        <mkdir dir="dynamic_classes_1"/>
+        <javac srcdir="src_dynamic_1" destdir="dynamic_classes_1">
+            <classpath>
+                <pathelement location="bin/"/>
+            </classpath>
+        </javac>
+        <mkdir dir="dynamic_classes_2"/>
+        <javac srcdir="src_dynamic_2" destdir="dynamic_classes_2">
+            <classpath>
+                <pathelement location="bin/"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="com.romanenco.cloader.Example">
+            <classpath>
+                <pathelement location="./bin"/>
+         </classpath>
+        </java>
+    </target>
+
+</project>
